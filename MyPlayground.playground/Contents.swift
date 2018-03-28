@@ -6,31 +6,38 @@ var array1 = [1, 2, 3, 3, 2, 1, 0]
 var array2 = [1, 2, 3, 3, 3, 3, 2]
 var array3 = [2]
 var array4 = [3, 3, 3]
+var array5 = Array(repeating: 4, count: 10001)
 
-// OddOccurrencesInArray
 public func solution(_ A : inout [Int]) -> Int {
-    print("solution(A)")
+    var tempArray: [Int] = A
     
-    for (i, v) in A.enumerated() {
-        if (A.count == 1) {
-            return A[0]
+    for e in tempArray {
+        if (tempArray.count == 1) {
+            return tempArray[0]
         }
         
-        let results = A.enumerated().filter { p in
-            p.element == v
+        let matchedElements = tempArray.filter { ee in
+            ee == e
         }
         
-        if (results.count >= 2) {
-            A.remove(at: results[0].offset)
-            A.remove(at: results[1].offset - 1)
-            print(A)
+        if matchedElements.count == 1 {
+            return matchedElements[0]
+        }
+        
+        if matchedElements.count % 2 == 0 {
+            tempArray = tempArray.filter { ee in
+                ee != e
+            }
+        } else {
+            return matchedElements[0]
         }
     }
     
-    return 0;
+    return -1;
 }
 
 assert(solution(&array1) == 0)
 assert(solution(&array2) == 1)
 assert(solution(&array3) == 2)
 assert(solution(&array4) == 3)
+assert(solution(&array5) == 4)
