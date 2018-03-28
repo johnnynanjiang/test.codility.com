@@ -2,13 +2,12 @@
 
 import UIKit
 
-var array1 = [1, 2, 3, 3, 2, 1, 0]
-var array2 = [1, 2, 3, 3, 3, 3, 2]
-var array3 = [2]
-var array4 = [3, 3, 3]
-var array5 = Array(repeating: 4, count: 10001)
-
 public func solution(_ A : inout [Int]) -> Int {
+    return solution2(&A)
+}
+
+//O(N**2)
+public func solution1(_ A : inout [Int]) -> Int {
     var tempArray: [Int] = A
     
     for e in tempArray {
@@ -35,6 +34,33 @@ public func solution(_ A : inout [Int]) -> Int {
     
     return -1;
 }
+
+//O(N) or O(N*log(N))
+public func solution2(_ A : inout [Int]) -> Int {
+    var dict = [Int : Int]()
+    
+    for e in A {
+        var newValue: Int = 1
+        
+        if let existingValue = dict[e] {
+            newValue = newValue + existingValue
+        }
+        
+        dict[e] = newValue
+    }
+    
+    let result = dict.filter { e -> Bool in
+        e.value == 1 || e.value % 2 != 0
+    }
+    
+    return result.first!.key
+}
+
+var array1 = [1, 2, 3, 3, 2, 1, 0]
+var array2 = [1, 2, 3, 3, 3, 3, 2]
+var array3 = [2]
+var array4 = [3, 3, 3]
+var array5 = Array(repeating: 4, count: 10001)
 
 assert(solution(&array1) == 0)
 assert(solution(&array2) == 1)
