@@ -43,3 +43,19 @@ Promise.all([promise(3, 3), promise(4,4)]).then(
         console.log(values);
     }
 );
+
+let asyncFunc = async function(id, value) {
+	console.log("asyncFunc {0} {1}", id, value);
+}
+
+let aynscFuncCaller = async function() {
+    let result = await asyncFunc(100, 100);
+
+    let result_4_4 = await promise(4, 1);
+    let result_5_5 = await promise(5, 1);
+
+    console.log(result_4_4);
+    console.log(result_5_5);
+}
+
+aynscFuncCaller();
