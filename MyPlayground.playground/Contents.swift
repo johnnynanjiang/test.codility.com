@@ -1,5 +1,6 @@
 //: Playground - noun: a place where people can play
 
+/*
 import UIKit
 
 public func solution(_ A : inout [Int]) -> Int {
@@ -67,3 +68,17 @@ assert(solution(&array2) == 1)
 assert(solution(&array3) == 2)
 assert(solution(&array4) == 3)
 assert(solution(&array5) == 4)
+*/
+
+// GCD
+
+switch 1 {
+case 0..<10:
+    print("0...10")
+    fallthrough
+case 10...20:
+    print("10...20")
+    fallthrough
+default:
+    print("default")
+}
